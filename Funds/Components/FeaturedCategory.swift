@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FeaturedCategory: View {
-    var category: Category = categories[0]
+    var category: Category
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -19,10 +19,10 @@ struct FeaturedCategory: View {
                 Spacer()
                 
             HStack(alignment: .center) {
-                    Text("$\(category.currentSpend, specifier: "%.2f")")
+                    Text("$\(category.spend, specifier: "%.2f")")
                         .font(.title3.weight(.medium))
                     
-                    Text("/ $\(category.targetAmount, specifier: "%.2f")")
+                    Text("/ $\(category.target, specifier: "%.2f")")
                         .font(.footnote)
                         .foregroundColor(.secondary)
                     
@@ -47,8 +47,8 @@ struct FeaturedCategory: View {
     }
 }
 
-struct FeaturedCategory_Previews: PreviewProvider {
-    static var previews: some View {
-        FeaturedCategory()
-    }
-}
+//struct FeaturedCategory_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FeaturedCategory()
+//    }
+//}

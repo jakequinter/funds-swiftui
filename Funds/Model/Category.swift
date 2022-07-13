@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct Category: Identifiable {
-    let id = UUID()
+    let id = UUID().uuidString
     var name: String
-    var currentSpend: CGFloat
-    var targetAmount: CGFloat
+    var spend: CGFloat
+    var target: CGFloat
 }
 
-var categories = [
-    Category(name: "Groceries", currentSpend: 221.56, targetAmount: 600),
-    Category(name: "Restaurants", currentSpend: 112.13, targetAmount: 400),
-    Category(name: "Miscellaneous", currentSpend: 875.12, targetAmount: 1300),
-    Category(name: "Recuring", currentSpend: 614, targetAmount: 614),
-]
+//var categories = [
+//    Category(name: "Groceries", spend: 221.56, target: 600),
+//    Category(name: "Restaurants", spend: 112.13, target: 400),
+//    Category(name: "Miscellaneous", spend: 875.12, target: 1300),
+//    Category(name: "Recuring", spend: 614, target: 614),
+//]
 

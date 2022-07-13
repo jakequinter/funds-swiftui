@@ -8,23 +8,27 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject private var viewModel = CategoriesViewModel()
+    
     var body: some View {
-            TabView {
-                ForEach(categories) { category in
-                    GeometryReader { proxy in
-                        let minX = proxy.frame(in: .global).minX
-                        
-                        FeaturedCategory(category: category)
-                            .padding(.vertical, 40)
-                            .rotation3DEffect(.degrees(minX / -10), axis: (x: 0, y: 1, z: 0))
-                            .shadow(color: Color("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
-                            .blur(radius: abs(minX / 40))
-                        
-                    }
+        TabView {
+            ForEach(viewModel.categories) { category in
+                GeometryReader { proxy in
+                    let minX = proxy.frame(in: .global).minX
+                    
+                    FeaturedCategory(category: category)
+                        .padding(.vertical, 40)
+                        .rotation3DEffect(.degrees(minX / -10), axis: (x: 0, y: 1, z: 0))
+                        .shadow(color: Color("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
+                        .blur(radius: abs(minX / 40))
+                    
                 }
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
-            .background(Image("Blob 1").offset(x: 250, y: -100))
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .onAppear() {
+            viewModel.fetchData()
+        }
     }
 }
 
