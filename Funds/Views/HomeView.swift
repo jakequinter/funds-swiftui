@@ -19,7 +19,7 @@ struct HomeView: View {
                     FeaturedCategory(category: category)
                         .padding(.vertical, 40)
                         .rotation3DEffect(.degrees(minX / -10), axis: (x: 0, y: 1, z: 0))
-                        .shadow(color: Color("Shadow").opacity(0.3), radius: 10, x: 0, y: 10)
+                        .shadow(color: Color(.black).opacity(0.3), radius: 10, x: 0, y: 10)
                         .blur(radius: abs(minX / 40))
                     
                 }

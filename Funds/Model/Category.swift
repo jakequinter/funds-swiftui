@@ -14,10 +14,4 @@ struct Category: Identifiable {
     var target: CGFloat
 }
 
-//var categories = [
-//    Category(name: "Groceries", spend: 221.56, target: 600),
-//    Category(name: "Restaurants", spend: 112.13, target: 400),
-//    Category(name: "Miscellaneous", spend: 875.12, target: 1300),
-//    Category(name: "Recuring", spend: 614, target: 614),
-//]
 
