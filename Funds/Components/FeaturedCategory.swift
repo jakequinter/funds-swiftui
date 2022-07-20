@@ -19,8 +19,8 @@ struct FeaturedCategory: View {
                 Spacer()
                 
             HStack(alignment: .center) {
-                    Text("$\(category.spend, specifier: "%.2f")")
-                        .font(.title3.weight(.medium))
+//                    Text("$\(category.spend, specifier: "%.2f")")
+//                        .font(.title3.weight(.medium))
                     
                     Text("/ $\(category.target, specifier: "%.2f")")
                         .font(.footnote)

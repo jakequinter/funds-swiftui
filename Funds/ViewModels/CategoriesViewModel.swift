@@ -13,29 +13,11 @@ class CategoriesViewModel: ObservableObject {
     
     private var db = Firestore.firestore()
     
-    //    func fetchData() {
-    //        db.collection("Categories").whereField("monthId", isEqualTo: "tgkWfPpuGls2zDoq4Woq").order(by: "createdAt", descending: false).addSnapshotListener { (querySnapshot, error) in
-    //            guard let documents = querySnapshot?.documents else {
-    //                print("No documents")
-    //
-    //                return
-    //            }
-    //
-//                self.categories = documents.map { (queryDocumentSnapshot) -> Category in
-//                    let data = queryDocumentSnapshot.data()
-//
-//                    let name = data["name"] as? String ?? ""
-//                    let spend = data["spend"] as? CGFloat ?? 0
-//                    let target = data["target"] as? CGFloat ?? 0
-//
-//                    return Category(name: name, spend: spend, target: target)
-//                }
-    //        }
-    //    }
-    
-    func fetchData() {
-        let categories = self.db.collection("Categories") //self.db points to *my* firestore
-        categories.whereField("monthId", isEqualTo: "tgkWfPpuGls2zDoq4Woq").getDocuments(completion: { querySnapshot, error in
+    func fetchCategories(monthId: String) {
+        let categories = self.db.collection("categories") //self.db points to *my* firestore
+        categories.whereField("monthId", isEqualTo: monthId)
+            .order(by: "name")
+            .getDocuments(completion: { querySnapshot, error in
             if let err = error {
                 print(err.localizedDescription)
                 return
@@ -47,10 +29,9 @@ class CategoriesViewModel: ObservableObject {
                 let data = queryDocumentSnapshot.data()
 
                 let name = data["name"] as? String ?? ""
-                let spend = data["spend"] as? CGFloat ?? 0
                 let target = data["target"] as? CGFloat ?? 0
 
-                return Category(name: name, spend: spend, target: target)
+                return Category(name: name, target: target)
             }
         })
     }
