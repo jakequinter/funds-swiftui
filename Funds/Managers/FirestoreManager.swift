@@ -47,6 +47,7 @@ class FirestoreManager {
     func fetchMonthCategories(monthId: String, completion: @escaping (Result<[Category]?, Error>) -> Void) {
         db.collection("categories")
             .whereField("monthId", isEqualTo: monthId)
+            .order(by: "name")
             .getDocuments { snapshot, error in
                 if let error = error {
                     completion(.failure(error))

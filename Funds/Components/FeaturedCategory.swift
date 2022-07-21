@@ -13,31 +13,31 @@ struct FeaturedCategory: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-                Text(category.name)
-                    .font(.largeTitle.bold())
-                    .foregroundStyle(.blue)
+            Text(category.name)
+                .font(.largeTitle.bold())
+                .foregroundStyle(.blue)
+            
+            Spacer()
+            
+            HStack(alignment: .center) {
+                Text("$\(sumExpensesByCategory(categoryName: category.name), specifier: "%.2f")")
+                    .font(.title3.weight(.medium))
+                
+                Text("/ $\(category.target, specifier: "%.2f")")
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
                 
                 Spacer()
                 
-            HStack(alignment: .center) {
-                Text("$\(sumExpensesByCategory(categoryName: category.name), specifier: "%.2f")")
-                        .font(.title3.weight(.medium))
-                    
-                    Text("/ $\(category.target, specifier: "%.2f")")
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                    
-                    Spacer()
-                    
-                    Text("35.21%")
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 2)
-                        .background(.green.opacity(0.2))
-                        .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                        .foregroundColor(.green)
-                        .font(.footnote)
-                        .foregroundColor(.secondary)
-                }
+                Text("35.21%")
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 2)
+                    .background(.green.opacity(0.2))
+                    .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
+                    .foregroundColor(.green)
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+            }
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)

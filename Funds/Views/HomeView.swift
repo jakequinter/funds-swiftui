@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject private var monthsViewModel = MonthsViewModel()
+    var monthsViewModel: MonthsViewModel
+    //    @ObservedObject private var monthsViewModel = MonthsViewModel()
     
     @State private var isPresented = false;
     
@@ -29,44 +30,46 @@ struct HomeView: View {
                         }
                     }
                 }
+                .frame(height: 220)
                 
-                Section("Expenses") {
-                    List(monthsViewModel.expenses) { expense in
-                        HStack {
-                            Text(expense.name)
-                            Spacer()
-                            Text("$\(expense.spend, specifier: "%.2f")")
-                            
-                            Text(expense.type)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .font(.caption2)
-                                .background(Capsule().fill(.blue.opacity(0.15)))
+                List {
+                    Section(header: Text("Expenses")) {
+                        ForEach(monthsViewModel.expenses) {expense in
+                            HStack {
+                                Text(expense.name)
+                                Spacer()
+                                Text("$\(expense.spend, specifier: "%.2f")")
+                                
+                                Text(expense.type)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .font(.caption2)
+                                    .background(Capsule().fill(.blue.opacity(0.15)))
+                            }
                         }
                     }
-                    .listStyle(.plain)
                 }
+                .listStyle(.plain)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .onAppear {
-                monthsViewModel.fetchCurrentMonth()
-            }
             .sheet(isPresented: $isPresented, content: {
                 AddExpenseView(categories: monthsViewModel.categories)
                     .presentationDetents([.medium])
             })
             .toolbar() {
-                Button("Add expense", action: {
-                    isPresented = true
-                })
+                if !monthsViewModel.expenses.isEmpty {
+                    Button("Add expense", action: {
+                        isPresented = true
+                    })
+                }
             }
             .navigationTitle("funds")
         }
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView()
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView()
+//    }
+//}

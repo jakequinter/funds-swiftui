@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoriesView: View {
-    @ObservedObject private var monthsViewModel = MonthsViewModel()
+    var monthsViewModel: MonthsViewModel
     
     var body: some View {
         NavigationView {
@@ -25,8 +25,8 @@ struct CategoriesView: View {
     }
 }
 
-struct CategoriesView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoriesView()
-    }
-}
+//struct CategoriesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CategoriesView()
+//    }
+//}

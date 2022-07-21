@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    var monthsViewModel: MonthsViewModel
     @State private var selectedTab = "home"
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView()
+            HomeView(monthsViewModel: monthsViewModel)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
@@ -21,7 +22,7 @@ struct ContentView: View {
                 }
                 .tag("home")
             
-            CategoriesView()
+            CategoriesView(monthsViewModel: monthsViewModel)
                 .tabItem {
                     Label("Categories", systemImage: "rectangle.stack")
                 }
@@ -30,7 +31,7 @@ struct ContentView: View {
                 }
                 .tag("categories")
             
-            CategoriesView()
+            CategoriesView(monthsViewModel: monthsViewModel)
                 .tabItem {
                     Label("History", systemImage: "calendar")
                 }
@@ -43,8 +44,8 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}
