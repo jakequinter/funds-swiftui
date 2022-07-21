@@ -9,36 +9,125 @@ import Foundation
 import Firebase
 
 class MonthsViewModel: ObservableObject {
-    @Published var month = Month(month: 0, year: 0)
+    private var firestoreManager: FirestoreManager
+    @Published var month: MonthViewModel = MonthViewModel(monthModel: Month(month: 0, year: 0))
+    @Published var categories: [CategoryViewModel] = []
+    @Published var expenses: [ExpenseViewModel] = []
     
-    private var db = Firestore.firestore()
+    init() {
+        firestoreManager = FirestoreManager()
+    }
     
     func fetchCurrentMonth() {
-        let currentMonth = Calendar.current.component(.month, from: Date())
-        let currentYear = Calendar.current.component(.year, from: Date())
-        
-        let docRef = db.collection("months").whereField("month", isEqualTo: currentMonth).whereField("year", isEqualTo: currentYear)
-        
-        docRef.getDocuments { snapshot, error in
-            if let err = error {
-                print(err.localizedDescription)
-                return
-            } else {
-                if let snapshot = snapshot {
-                    let months: [Month]? = snapshot.documents.compactMap { doc in
-                        var month = try? doc.data(as: Month.self)
-                        if month != nil {
-                            month!.id = doc.documentID
+        firestoreManager.fetchMonth { result in
+            switch result {
+            case .success(let months):
+                if let months = months {
+                    DispatchQueue.main.async {
+                        let allMonths = months.map(MonthViewModel.init)
+                        if allMonths.count > 0 {
+                            self.month = allMonths[0]
+                            self.fetchCurrentMonthCategories(monthId: allMonths[0].id)
                         }
-                        
-                        return month
-                    }
-                    
-                    if months != nil && months!.count > 0 {
-                        self.month = months![0]
                     }
                 }
+            case .failure(let error):
+                print("ERROR: \(error.localizedDescription)")
             }
         }
+    }
+    
+    func fetchCurrentMonthCategories(monthId: String) {
+        firestoreManager.fetchMonthCategories(monthId: monthId) { result in
+            switch result {
+            case .success(let categories):
+                if let categories = categories {
+                    DispatchQueue.main.async {
+                        self.categories = categories.map(CategoryViewModel.init)
+                        
+                        if self.categories.count > 0 {
+                            self.fetchCurrentMonthCategoryExpenses(categoryIds: self.categories.map {
+                                $0.id
+                            })
+                        }
+                    }
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchCurrentMonthCategoryExpenses(categoryIds: [String]) {
+        firestoreManager.fetchCategoryExpenses(categoryIds: categoryIds) { result in
+            switch result {
+            case .success(let expenses):
+                if let expenses = expenses {
+                    DispatchQueue.main.async {
+                        self.expenses = expenses.map(ExpenseViewModel.init)
+                    }
+                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
+
+struct MonthViewModel: Identifiable {
+    let monthModel: Month
+    
+    var id: String {
+        monthModel.id ?? ""
+    }
+    
+    var month: Int {
+        monthModel.month
+    }
+    
+    var year: Int {
+        monthModel.year
+    }
+    
+    var categories: [String] {
+        monthModel.categories ?? []
+    }
+}
+
+struct CategoryViewModel: Identifiable {
+    let category: Category
+    
+    var id: String {
+        category.id ?? ""
+    }
+    
+    var name: String {
+        category.name
+    }
+    
+    var target: CGFloat {
+        category.target
+    }
+}
+
+struct ExpenseViewModel: Identifiable {
+    let expense: Expense
+    
+    var id: String {
+        expense.id ?? ""
+    }
+    
+    var name: String {
+        expense.name
+    }
+    
+    var spend: CGFloat {
+        expense.spend
+    }
+    
+    var type: String {
+        expense.type
     }
 }

@@ -21,7 +21,7 @@ struct ContentView: View {
                 }
                 .tag("home")
             
-            HomeView()
+            CategoriesView()
                 .tabItem {
                     Label("Categories", systemImage: "rectangle.stack")
                 }
@@ -30,7 +30,7 @@ struct ContentView: View {
                 }
                 .tag("categories")
             
-            HomeView()
+            CategoriesView()
                 .tabItem {
                     Label("History", systemImage: "calendar")
                 }

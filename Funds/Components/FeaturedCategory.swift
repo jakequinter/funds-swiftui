@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct FeaturedCategory: View {
-    var category: Category
+    var category: CategoryViewModel
+    var expenses: [ExpenseViewModel]
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -19,8 +20,8 @@ struct FeaturedCategory: View {
                 Spacer()
                 
             HStack(alignment: .center) {
-//                    Text("$\(category.spend, specifier: "%.2f")")
-//                        .font(.title3.weight(.medium))
+                Text("$\(sumExpensesByCategory(categoryName: category.name), specifier: "%.2f")")
+                        .font(.title3.weight(.medium))
                     
                     Text("/ $\(category.target, specifier: "%.2f")")
                         .font(.footnote)
@@ -44,6 +45,14 @@ struct FeaturedCategory: View {
         .background(.ultraThinMaterial)
         .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
         .padding(.horizontal, 20)
+    }
+    
+    func sumExpensesByCategory(categoryName: String) -> CGFloat {
+        let expenses = expenses.filter { $0.type == categoryName.lowercased()}
+        let expensesTotal = expenses.reduce(0) { $0 + $1.spend }
+        
+        return expensesTotal
+        
     }
 }
 

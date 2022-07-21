@@ -10,12 +10,10 @@
 		B71206BD28888921005DC324 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71206BC28888921005DC324 /* AddExpenseView.swift */; };
 		B71206C12888A6C1005DC324 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71206C02888A6C1005DC324 /* Expense.swift */; };
 		B71206C32888B4C3005DC324 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B71206C22888B4C3005DC324 /* FirebaseFirestoreSwift */; };
-		B71206C52888C556005DC324 /* ExpensesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71206C42888C556005DC324 /* ExpensesViewModel.swift */; };
 		B713E29B287E19BA003A3294 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B713E29A287E19BA003A3294 /* GoogleService-Info.plist */; };
 		B713E29F287E1C42003A3294 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B713E29E287E1C42003A3294 /* FirebaseAnalytics */; };
 		B713E2A1287E1C42003A3294 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B713E2A0287E1C42003A3294 /* FirebaseAuth */; };
 		B713E2A6287E225E003A3294 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B713E2A5287E225E003A3294 /* FirebaseFirestore */; };
-		B713E2AD287E2403003A3294 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B713E2AC287E2403003A3294 /* CategoriesViewModel.swift */; };
 		B736D691287CC66A00AA262C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736D690287CC66A00AA262C /* HomeView.swift */; };
 		B736D693287CC69100AA262C /* FeaturedCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736D692287CC69100AA262C /* FeaturedCategory.swift */; };
 		B736D697287CC6CA00AA262C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736D696287CC6CA00AA262C /* Category.swift */; };
@@ -25,14 +23,14 @@
 		B7ED251B2878D1D1009F5E32 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ED251A2878D1D1009F5E32 /* ContentView.swift */; };
 		B7ED251D2878D1D2009F5E32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7ED251C2878D1D2009F5E32 /* Assets.xcassets */; };
 		B7ED25202878D1D2009F5E32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7ED251F2878D1D2009F5E32 /* Preview Assets.xcassets */; };
+		B7F446812889A2A200D28461 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F446802889A2A200D28461 /* FirestoreManager.swift */; };
+		B7F446832889E19900D28461 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F446822889E19900D28461 /* CategoriesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B71206BC28888921005DC324 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		B71206C02888A6C1005DC324 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
-		B71206C42888C556005DC324 /* ExpensesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewModel.swift; sourceTree = "<group>"; };
 		B713E29A287E19BA003A3294 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B713E2AC287E2403003A3294 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		B736D690287CC66A00AA262C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B736D692287CC69100AA262C /* FeaturedCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedCategory.swift; sourceTree = "<group>"; };
 		B736D696287CC6CA00AA262C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -43,6 +41,8 @@
 		B7ED251A2878D1D1009F5E32 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B7ED251C2878D1D2009F5E32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7ED251F2878D1D2009F5E32 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B7F446802889A2A200D28461 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		B7F446822889E19900D28461 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +78,10 @@
 		B736D695287CC6B900AA262C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B7ED251A2878D1D1009F5E32 /* ContentView.swift */,
 				B736D690287CC66A00AA262C /* HomeView.swift */,
 				B71206BC28888921005DC324 /* AddExpenseView.swift */,
+				B7F446822889E19900D28461 /* CategoriesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -94,19 +96,9 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		B736D699287CC79D00AA262C /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				B7ED251A2878D1D1009F5E32 /* ContentView.swift */,
-			);
-			path = Navigation;
-			sourceTree = "<group>";
-		};
 		B765467F287F74AB003D2981 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				B713E2AC287E2403003A3294 /* CategoriesViewModel.swift */,
-				B71206C42888C556005DC324 /* ExpensesViewModel.swift */,
 				B737A11A2880B34F00490D20 /* MonthsViewModel.swift */,
 			);
 			path = ViewModels;
@@ -133,9 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				B7ED25182878D1D1009F5E32 /* FundsApp.swift */,
-				B765467F287F74AB003D2981 /* ViewModels */,
-				B736D699287CC79D00AA262C /* Navigation */,
+				B7F4467F2889A29200D28461 /* Managers */,
 				B736D698287CC6D200AA262C /* Models */,
+				B765467F287F74AB003D2981 /* ViewModels */,
 				B736D695287CC6B900AA262C /* Views */,
 				B736D694287CC6B200AA262C /* Components */,
 				B713E29A287E19BA003A3294 /* GoogleService-Info.plist */,
@@ -151,6 +143,14 @@
 				B7ED251F2878D1D2009F5E32 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B7F4467F2889A29200D28461 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B7F446802889A2A200D28461 /* FirestoreManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,15 +234,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B71206BD28888921005DC324 /* AddExpenseView.swift in Sources */,
-				B71206C52888C556005DC324 /* ExpensesViewModel.swift in Sources */,
 				B736D691287CC66A00AA262C /* HomeView.swift in Sources */,
 				B736D697287CC6CA00AA262C /* Category.swift in Sources */,
 				B7ED251B2878D1D1009F5E32 /* ContentView.swift in Sources */,
 				B71206C12888A6C1005DC324 /* Expense.swift in Sources */,
 				B7ED25192878D1D1009F5E32 /* FundsApp.swift in Sources */,
+				B7F446812889A2A200D28461 /* FirestoreManager.swift in Sources */,
 				B765467E287F6DC4003D2981 /* Month.swift in Sources */,
+				B7F446832889E19900D28461 /* CategoriesView.swift in Sources */,
 				B737A11B2880B34F00490D20 /* MonthsViewModel.swift in Sources */,
-				B713E2AD287E2403003A3294 /* CategoriesViewModel.swift in Sources */,
 				B736D693287CC69100AA262C /* FeaturedCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,58 +8,53 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject private var viewModel = MonthsViewModel()
-    @ObservedObject private var categoriesViewModel = CategoriesViewModel()
-    @ObservedObject private var expensesViewModel = ExpensesViewModel()
+    @ObservedObject private var monthsViewModel = MonthsViewModel()
     
     @State private var isPresented = false;
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                Text("\(viewModel.month.id ?? "ID not found")")
                 TabView {
-                    ForEach(categoriesViewModel.categories) { category in
+                    ForEach(monthsViewModel.categories, id: \.id) { category in
                         GeometryReader { proxy in
                             let minX = proxy.frame(in: .global).minX
                             
-                            FeaturedCategory(category: category)
+                            FeaturedCategory(category: category, expenses: monthsViewModel.expenses )
                                 .padding(.vertical, 40)
                                 .rotation3DEffect(.degrees(minX / -10), axis: (x: 0, y: 1, z: 0))
                                 .shadow(color: Color(.black).opacity(0.3), radius: 10, x: 0, y: 10)
                                 .blur(radius: abs(minX / 40))
-
+                            
                         }
                     }
                 }
                 
                 Section("Expenses") {
-                    List() {
-                        ForEach(expensesViewModel.expenses) { expense in
-                            HStack {
-                                Text(expense.name)
-                                Spacer()
-                                Text("$\(expense.spend)")
-                            }
+                    List(monthsViewModel.expenses) { expense in
+                        HStack {
+                            Text(expense.name)
+                            Spacer()
+                            Text("$\(expense.spend, specifier: "%.2f")")
+                            
+                            Text(expense.type)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .font(.caption2)
+                                .background(Capsule().fill(.blue.opacity(0.15)))
                         }
                     }
                     .listStyle(.plain)
                 }
             }
-            .padding(.horizontal)
             .tabViewStyle(.page(indexDisplayMode: .never))
+            .onAppear {
+                monthsViewModel.fetchCurrentMonth()
+            }
             .sheet(isPresented: $isPresented, content: {
-                AddExpenseView()
+                AddExpenseView(categories: monthsViewModel.categories)
+                    .presentationDetents([.medium])
             })
-            .onAppear() {
-                viewModel.fetchCurrentMonth()
-                expensesViewModel.fetchExpenses(categoryIds: ["HTgCYqrtmllMIsNAGLkG", "z9ndHFbWA3IMjHSMFcGY"])
-            }
-            .onChange(of: [viewModel.month.id]) { _ in
-                if (viewModel.month.id != nil) {
-                    categoriesViewModel.fetchCategories(monthId: viewModel.month.id!)
-                }
-            }
             .toolbar() {
                 Button("Add expense", action: {
                     isPresented = true
