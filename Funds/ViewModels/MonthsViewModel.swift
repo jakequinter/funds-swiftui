@@ -13,6 +13,7 @@ class MonthsViewModel: ObservableObject {
     @Published var month: MonthViewModel = MonthViewModel(monthModel: Month(month: 0, year: 0))
     @Published var categories: [CategoryViewModel] = []
     @Published var expenses: [ExpenseViewModel] = []
+    @Published var hasCurrentMonth: Bool = false
     
     init() {
         firestoreManager = FirestoreManager()
@@ -33,6 +34,27 @@ class MonthsViewModel: ObservableObject {
                 }
             case .failure(let error):
                 print("ERROR: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func addNewMonth() {
+        let currentMonth = Calendar.current.component(.month, from: Date())
+        let currentYear = Calendar.current.component(.year, from: Date())
+        
+        let month = Month(month: currentMonth, year: currentYear)
+        firestoreManager.addMonth(month: month) { result in
+            switch result {
+            case .success(let month):
+                DispatchQueue.main.async {
+                    self.hasCurrentMonth = month == nil ? false : true
+                    
+                    if self.hasCurrentMonth {
+                        self.fetchCurrentMonth()
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
@@ -89,10 +111,6 @@ struct MonthViewModel: Identifiable {
     
     var year: Int {
         monthModel.year
-    }
-    
-    var categories: [String] {
-        monthModel.categories ?? []
     }
 }
 

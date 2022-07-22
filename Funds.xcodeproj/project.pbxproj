@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B70C819A288B51D200319298 /* AddMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70C8199288B51D200319298 /* AddMonthView.swift */; };
 		B71206BD28888921005DC324 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71206BC28888921005DC324 /* AddExpenseView.swift */; };
 		B71206C12888A6C1005DC324 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = B71206C02888A6C1005DC324 /* Expense.swift */; };
 		B71206C32888B4C3005DC324 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B71206C22888B4C3005DC324 /* FirebaseFirestoreSwift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B70C8199288B51D200319298 /* AddMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMonthView.swift; sourceTree = "<group>"; };
 		B71206BC28888921005DC324 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 		B71206C02888A6C1005DC324 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		B713E29A287E19BA003A3294 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				B71206BC28888921005DC324 /* AddExpenseView.swift */,
 				B7F446822889E19900D28461 /* CategoriesView.swift */,
 				B7F446842889FD0E00D28461 /* SplashScreen.swift */,
+				B70C8199288B51D200319298 /* AddMonthView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				B7F446832889E19900D28461 /* CategoriesView.swift in Sources */,
 				B737A11B2880B34F00490D20 /* MonthsViewModel.swift in Sources */,
 				B736D693287CC69100AA262C /* FeaturedCategory.swift in Sources */,
+				B70C819A288B51D200319298 /* AddMonthView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

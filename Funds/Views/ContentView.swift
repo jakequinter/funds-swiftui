@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    var monthsViewModel: MonthsViewModel
+    @ObservedObject var monthsViewModel: MonthsViewModel
     @State private var selectedTab = "home"
     
     var body: some View {
@@ -39,7 +39,6 @@ struct ContentView: View {
                     selectedTab = "history"
                 }
                 .tag("history")
-            
         }
     }
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     var monthsViewModel: MonthsViewModel
-    //    @ObservedObject private var monthsViewModel = MonthsViewModel()
     
     @State private var isPresented = false;
     

@@ -12,5 +12,4 @@ struct Month: Codable, Identifiable {
     @DocumentID var id: String?
     let month: Int
     let year: Int
-    var categories: [String]?
 }

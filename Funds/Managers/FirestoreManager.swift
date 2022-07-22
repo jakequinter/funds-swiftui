@@ -16,6 +16,27 @@ class FirestoreManager {
         db = Firestore.firestore()
     }
     
+    /*
+        Months
+     */
+    func addMonth(month: Month, completion: @escaping (Result<Month?, Error>) -> Void) {
+        do {
+            let ref = try db.collection("months").addDocument(from: month)
+            
+            ref.getDocument { (snapshot, error) in
+                guard let snapshot = snapshot, error == nil else {
+                    completion(.failure(error!))
+                    return
+                }
+                
+                let month = try? snapshot.data(as: Month.self)
+                completion(.success(month))
+            }
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
     func fetchMonth(completion: @escaping (Result<[Month]?, Error>) -> Void) {
         let currentMonth = Calendar.current.component(.month, from: Date())
         let currentYear = Calendar.current.component(.year, from: Date())
@@ -44,6 +65,9 @@ class FirestoreManager {
             }
     }
     
+    /*
+        Categories
+     */
     func fetchMonthCategories(monthId: String, completion: @escaping (Result<[Category]?, Error>) -> Void) {
         db.collection("categories")
             .whereField("monthId", isEqualTo: monthId)
@@ -67,6 +91,9 @@ class FirestoreManager {
             }
     }
     
+    /*
+        Expenses
+     */
     func fetchCategoryExpenses(categoryIds: [String], completion: @escaping (Result<[Expense]?, Error>) -> Void) {
         db.collection("expenses")
             .whereField("categoryId", in: categoryIds)

@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct SplashScreen: View {
-    @ObservedObject private var monthsViewModel = MonthsViewModel()
+    @ObservedObject var monthsViewModel = MonthsViewModel()
     
     @State private var isActive = false
     @State private var size = 0.8
     @State private var opacity = 0.5
     
     var body: some View {
-        if isActive {
+        if isActive && monthsViewModel.month.month == 0 && monthsViewModel.month.year == 0 {
+            AddMonthView(monthsViewModel: monthsViewModel, hasCurrentMonth: $monthsViewModel.hasCurrentMonth)
+        } else if isActive && monthsViewModel.month.month != 0 && monthsViewModel.month.year != 0 {
             ContentView(monthsViewModel: monthsViewModel)
         } else {
             
