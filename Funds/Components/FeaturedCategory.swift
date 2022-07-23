@@ -48,7 +48,7 @@ struct FeaturedCategory: View {
     }
     
     func sumExpensesByCategory(categoryName: String) -> CGFloat {
-        let expenses = expenses.filter { $0.type == categoryName.lowercased()}
+        let expenses = expenses.filter { $0.type == categoryName}
         let expensesTotal = expenses.reduce(0) { $0 + $1.spend }
         
         return expensesTotal

@@ -51,7 +51,11 @@ struct HomeView: View {
                 .listStyle(.plain)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
-            .sheet(isPresented: $isPresented, content: {
+            .sheet(isPresented: $isPresented, onDismiss: {
+                monthsViewModel.fetchCurrentMonthCategoryExpenses(categoryIds: monthsViewModel.categories.map {
+                    $0.id
+                })
+            }, content: {
                 AddExpenseView(categories: monthsViewModel.categories)
                     .presentationDetents([.medium])
             })

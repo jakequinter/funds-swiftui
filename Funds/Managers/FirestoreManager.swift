@@ -115,4 +115,22 @@ class FirestoreManager {
                 }
             }
     }
+    
+    func addExpense(expense: Expense, completion: @escaping (Result<Expense?, Error>) -> Void) {
+        do {
+            let ref = try db.collection("expenses").addDocument(from: expense)
+            
+            ref.getDocument { (snapshot, error) in
+                guard let snapshot = snapshot, error == nil else {
+                    completion(.failure(error!))
+                    return
+                }
+                
+                let expense = try? snapshot.data(as: Expense.self)
+                completion(.success(expense))
+            }
+        } catch {
+            completion(.failure(error))
+        }
+    }
 }

@@ -8,12 +8,10 @@
 import SwiftUI
 
 struct AddExpenseView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @StateObject private var viewModel = AddExpenseViewModel()
     var categories: [CategoryViewModel]
-    
-    @State private var name = ""
-    @State private var spend = ""
-    @State private var selectedCategory = ""
-    
+ 
     var body: some View {
         VStack(spacing: 16) {
             Text("Add expense")
@@ -23,7 +21,7 @@ struct AddExpenseView: View {
                 Text("Name")
                     .font(.subheadline.weight(.medium))
                 
-                TextField("Enter a name", text: $name)
+                TextField("Enter a name", text: $viewModel.name)
                     .textFieldStyle(.roundedBorder)
             }
             
@@ -31,31 +29,44 @@ struct AddExpenseView: View {
                 Text("Amount")
                     .font(.subheadline.weight(.medium))
                 
-                TextField("Enter an amount", text: $spend)
+                TextField("Enter an amount", text: $viewModel.spend)
                     .textFieldStyle(.roundedBorder)
             }
             
             VStack(alignment: .leading, spacing: 4) {
                 Text("Category")
                     .font(.subheadline.weight(.medium))
-                Picker("Please choose a category", selection: $selectedCategory) {
+                Picker("Please choose a category", selection: $viewModel.categoryId) {
                     ForEach(categories) {
                         Text("\($0.name)")
                     }
                 }
                 .pickerStyle(.segmented)
+                .onChange(of: viewModel.categoryId) { newValue in
+                    print("NEW VALUE: \(newValue)")
+                    handleExpenseType(categoryId: newValue)
+                }
             }
             
             Spacer()
             
             Button("Add expense"){
-                print("name: \(name)")
-                print("spend: \(spend)")
+                viewModel.addNewExpense()
             }
             .buttonStyle(.borderedProminent)
-            
         }
         .padding()
+        .onChange(of: viewModel.expenseSaved, perform: { value in
+            if value {
+                presentationMode.wrappedValue.dismiss()
+            }
+        })
+    }
+    
+    func handleExpenseType(categoryId: String)  {
+        let category = categories.first(where: { $0.id == categoryId })
+        
+        viewModel.type = category?.name ?? "unknown"
     }
 }
 

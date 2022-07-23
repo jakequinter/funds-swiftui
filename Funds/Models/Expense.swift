@@ -10,6 +10,7 @@ import FirebaseFirestoreSwift
 
 struct Expense: Codable, Identifiable {
     @DocumentID var id: String?
+    var categoryId: String
     var name: String
     var spend: CGFloat
     var type: String
