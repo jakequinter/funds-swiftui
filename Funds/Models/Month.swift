@@ -10,6 +10,7 @@ import FirebaseFirestoreSwift
 
 struct Month: Codable, Identifiable {
     @DocumentID var id: String?
+    var userId: String
     let month: Int
     let year: Int
 }

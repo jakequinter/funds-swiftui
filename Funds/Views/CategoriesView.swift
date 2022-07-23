@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct CategoriesView: View {
-    var categories: [CategoryViewModel]
+    @StateObject var monthsViewModel = MonthsViewModel()
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(categories) { category in
+                ForEach(monthsViewModel.categories) { category in
                     Text(category.name)
                 }
             }
-            .navigationTitle("Categories")
+            .navigationBarTitle("Categories")
+            .onAppear {
+                monthsViewModel.fetchCurrentMonth()
+            }
         }
     }
 }

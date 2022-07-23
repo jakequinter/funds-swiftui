@@ -8,18 +8,30 @@
 import Foundation
 import Firebase
 
+enum LoadingState {
+    case idle
+    case loading
+    case success
+    case failure
+}
+
 class MonthsViewModel: ObservableObject {
     private var firestoreManager: FirestoreManager
-    @Published var month: MonthViewModel = MonthViewModel(monthModel: Month(month: 0, year: 0))
+    @Published var month: MonthViewModel?
     @Published var categories: [CategoryViewModel] = []
     @Published var expenses: [ExpenseViewModel] = []
     @Published var hasCurrentMonth: Bool = false
+    @Published var loadingState: LoadingState = .idle
     
     init() {
         firestoreManager = FirestoreManager()
     }
     
     func fetchCurrentMonth() {
+        DispatchQueue.main.async {
+            self.loadingState = .loading
+        }
+        
         guard let currentUser = Auth.auth().currentUser else {
             return
         }
@@ -33,10 +45,17 @@ class MonthsViewModel: ObservableObject {
                         if allMonths.count > 0 {
                             self.month = allMonths[0]
                             self.fetchCurrentMonthCategories(monthId: allMonths[0].id)
+                        } else {
+                            self.month = nil
                         }
+                        
+                        self.loadingState = .success
                     }
                 }
             case .failure(let error):
+                DispatchQueue.main.async {
+                    self.loadingState = .failure
+                }
                 print("ERROR: \(error.localizedDescription)")
             }
         }
@@ -46,7 +65,11 @@ class MonthsViewModel: ObservableObject {
         let currentMonth = Calendar.current.component(.month, from: Date())
         let currentYear = Calendar.current.component(.year, from: Date())
         
-        let month = Month(month: currentMonth, year: currentYear)
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        
+        let month = Month(userId: currentUser.uid, month: currentMonth, year: currentYear)
         firestoreManager.addMonth(month: month) { result in
             switch result {
             case .success(let month):
@@ -109,6 +132,10 @@ struct MonthViewModel: Identifiable {
         monthModel.id ?? ""
     }
     
+    var monthId: String {
+        monthModel.userId ?? ""
+    }
+    
     var month: Int {
         monthModel.month
     }
@@ -123,6 +150,10 @@ struct CategoryViewModel: Identifiable {
     
     var id: String {
         category.id ?? ""
+    }
+    
+    var monthId: String {
+        category.monthId
     }
     
     var name: String {

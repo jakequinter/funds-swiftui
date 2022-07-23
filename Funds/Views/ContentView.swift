@@ -6,38 +6,45 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ContentView: View {
+    @EnvironmentObject var monthsViewModel: MonthsViewModel
+    
     @State private var selectedTab = "home"
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-                .onTapGesture {
-                    selectedTab = "home"
-                }
-                .tag("home")
-            
-//            CategoriesView(categories: monthsViewModel.categories)
-//                .tabItem {
-//                    Label("Categories", systemImage: "rectangle.stack")
-//                }
-//                .onTapGesture {
-//                    selectedTab = "categories"
-//                }
-//                .tag("categories")
-//
-//            CategoriesView(categories: monthsViewModel.categories)
-//                .tabItem {
-//                    Label("History", systemImage: "calendar")
-//                }
-//                .onTapGesture {
-//                    selectedTab = "history"
-//                }
-//                .tag("history")
+        if Auth.auth().currentUser ==  nil {
+            LoginView()
+        } else {
+            TabView(selection: $selectedTab) {
+                HomeView()
+                    .tabItem {
+                        Label("Home", systemImage: "house")
+                    }
+                    .onTapGesture {
+                        selectedTab = "home"
+                    }
+                    .tag("home")
+                
+                CategoriesView()
+                    .tabItem {
+                        Label("Categories", systemImage: "rectangle.stack")
+                    }
+                    .onTapGesture {
+                        selectedTab = "categories"
+                    }
+                    .tag("categories")
+                
+                CategoriesView()
+                    .tabItem {
+                        Label("History", systemImage: "calendar")
+                    }
+                    .onTapGesture {
+                        selectedTab = "history"
+                    }
+                    .tag("history")
+            }
         }
     }
 }

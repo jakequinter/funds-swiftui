@@ -8,31 +8,35 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject private var monthsViewModel = MonthsViewModel()
+    @StateObject var monthsViewModel = MonthsViewModel()
     
     @State private var isPresented = false;
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                TabView {
-                    ForEach(monthsViewModel.categories, id: \.id) { category in
-                        GeometryReader { proxy in
-                            let minX = proxy.frame(in: .global).minX
-                            
-                            FeaturedCategory(category: category, expenses: monthsViewModel.expenses )
-                                .padding(.vertical, 40)
-                                .rotation3DEffect(.degrees(minX / -10), axis: (x: 0, y: 1, z: 0))
-                                .shadow(color: Color(.black).opacity(0.3), radius: 10, x: 0, y: 10)
-                                .blur(radius: abs(minX / 40))
-                            
+                if monthsViewModel.loadingState == .loading {
+                    LoadingView(loadingState: monthsViewModel.loadingState)
+                } else if monthsViewModel.loadingState == .success && monthsViewModel.month == nil {
+                    AddMonthView(monthsViewModel: monthsViewModel, hasCurrentMonth: $monthsViewModel.hasCurrentMonth)
+                } else {
+                    TabView {
+                        ForEach(monthsViewModel.categories, id: \.id) { category in
+                            GeometryReader { proxy in
+                                let minX = proxy.frame(in: .global).minX
+                                
+                                FeaturedCategory(category: category, expenses: monthsViewModel.expenses )
+                                    .padding(.vertical, 40)
+                                    .rotation3DEffect(.degrees(minX / -10), axis: (x: 0, y: 1, z: 0))
+                                    .shadow(color: Color(.black).opacity(0.3), radius: 10, x: 0, y: 10)
+                                    .blur(radius: abs(minX / 40))
+                                
+                            }
                         }
                     }
-                }
-                .frame(height: 220)
-                
-                List {
-                    Section(header: Text("Expenses")) {
+                    .frame(height: 220)
+                    
+                    List {
                         ForEach(monthsViewModel.expenses) {expense in
                             HStack {
                                 Text(expense.name)
@@ -47,8 +51,9 @@ struct HomeView: View {
                             }
                         }
                     }
+                    .listStyle(.plain)
                 }
-                .listStyle(.plain)
+                
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
             .sheet(isPresented: $isPresented, onDismiss: {

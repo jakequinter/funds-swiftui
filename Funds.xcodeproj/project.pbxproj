@@ -25,13 +25,13 @@
 		B736D697287CC6CA00AA262C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B736D696287CC6CA00AA262C /* Category.swift */; };
 		B737A11B2880B34F00490D20 /* MonthsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B737A11A2880B34F00490D20 /* MonthsViewModel.swift */; };
 		B765467E287F6DC4003D2981 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = B765467D287F6DC4003D2981 /* Month.swift */; };
+		B7D929A3288C74C600243A2B /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D929A2288C74C600243A2B /* LoadingView.swift */; };
 		B7ED25192878D1D1009F5E32 /* FundsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ED25182878D1D1009F5E32 /* FundsApp.swift */; };
 		B7ED251B2878D1D1009F5E32 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7ED251A2878D1D1009F5E32 /* ContentView.swift */; };
 		B7ED251D2878D1D2009F5E32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7ED251C2878D1D2009F5E32 /* Assets.xcassets */; };
 		B7ED25202878D1D2009F5E32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7ED251F2878D1D2009F5E32 /* Preview Assets.xcassets */; };
 		B7F446812889A2A200D28461 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F446802889A2A200D28461 /* FirestoreManager.swift */; };
 		B7F446832889E19900D28461 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F446822889E19900D28461 /* CategoriesView.swift */; };
-		B7F446852889FD0E00D28461 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F446842889FD0E00D28461 /* SplashScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +49,7 @@
 		B736D696287CC6CA00AA262C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B737A11A2880B34F00490D20 /* MonthsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthsViewModel.swift; sourceTree = "<group>"; };
 		B765467D287F6DC4003D2981 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
+		B7D929A2288C74C600243A2B /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		B7ED25152878D1D1009F5E32 /* Funds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Funds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7ED25182878D1D1009F5E32 /* FundsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsApp.swift; sourceTree = "<group>"; };
 		B7ED251A2878D1D1009F5E32 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 		B7ED251F2878D1D2009F5E32 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B7F446802889A2A200D28461 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		B7F446822889E19900D28461 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
-		B7F446842889FD0E00D28461 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,9 +97,9 @@
 				B7F446822889E19900D28461 /* CategoriesView.swift */,
 				B7ED251A2878D1D1009F5E32 /* ContentView.swift */,
 				B736D690287CC66A00AA262C /* HomeView.swift */,
+				B7D929A2288C74C600243A2B /* LoadingView.swift */,
 				B70C819D288C332A00319298 /* LoginView.swift */,
 				B70C819F288C389C00319298 /* RegisterView.swift */,
-				B7F446842889FD0E00D28461 /* SplashScreen.swift */,
 				B736D694287CC6B200AA262C /* Components */,
 			);
 			path = Views;
@@ -254,7 +254,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7F446852889FD0E00D28461 /* SplashScreen.swift in Sources */,
 				B71206BD28888921005DC324 /* AddExpenseView.swift in Sources */,
 				B736D691287CC66A00AA262C /* HomeView.swift in Sources */,
 				B70C819E288C332A00319298 /* LoginView.swift in Sources */,
@@ -271,6 +270,7 @@
 				B737A11B2880B34F00490D20 /* MonthsViewModel.swift in Sources */,
 				B70C81A0288C389C00319298 /* RegisterView.swift in Sources */,
 				B736D693287CC69100AA262C /* FeaturedCategory.swift in Sources */,
+				B7D929A3288C74C600243A2B /* LoadingView.swift in Sources */,
 				B70C819A288B51D200319298 /* AddMonthView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

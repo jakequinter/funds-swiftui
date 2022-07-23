@@ -10,6 +10,7 @@ import FirebaseFirestoreSwift
 
 struct Category: Codable, Identifiable {
     @DocumentID var id: String?
+    var monthId: String
     var name: String
     var target: CGFloat
 }
