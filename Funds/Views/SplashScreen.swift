@@ -22,12 +22,12 @@ struct SplashScreen: View {
         } else {
             
             ZStack {
-                Color(.green).opacity(0.3)
+                Color("Emerald").opacity(0.3)
                     .ignoresSafeArea()
                 VStack {
                     Image(systemName: "dollarsign.square.fill")
                         .font(.system(size: 80))
-                        .foregroundColor(.green)
+                        .foregroundColor(Color("Emerald"))
                     
                     Text("funds")
                         .font(.system(size: 24).bold())
