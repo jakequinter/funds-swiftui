@@ -56,7 +56,7 @@ struct HomeView: View {
                     $0.id
                 })
             }, content: {
-                AddExpenseView(categories: monthsViewModel.categories)
+                AddExpenseView(monthsViewModel: monthsViewModel)
                     .presentationDetents([.medium])
             })
             .onAppear {

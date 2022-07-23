@@ -10,7 +10,7 @@ import SwiftUI
 struct AddExpenseView: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var viewModel = AddExpenseViewModel()
-    var categories: [CategoryViewModel]
+    var monthsViewModel: MonthsViewModel
  
     var body: some View {
         VStack(spacing: 16) {
@@ -37,7 +37,7 @@ struct AddExpenseView: View {
                 Text("Category")
                     .font(.subheadline.weight(.medium))
                 Picker("Please choose a category", selection: $viewModel.categoryId) {
-                    ForEach(categories) {
+                    ForEach(monthsViewModel.categories) {
                         Text("\($0.name)")
                     }
                 }
@@ -58,13 +58,14 @@ struct AddExpenseView: View {
         .padding()
         .onChange(of: viewModel.expenseSaved, perform: { value in
             if value {
+                monthsViewModel.fetchCurrentMonthCategoryExpenses(categoryIds: monthsViewModel.categories.map { $0.id })
                 presentationMode.wrappedValue.dismiss()
             }
         })
     }
     
     func handleExpenseType(categoryId: String)  {
-        let category = categories.first(where: { $0.id == categoryId })
+        let category = monthsViewModel.categories.first(where: { $0.id == categoryId })
         
         viewModel.type = category?.name ?? "unknown"
     }

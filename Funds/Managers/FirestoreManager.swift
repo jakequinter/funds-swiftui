@@ -19,29 +19,12 @@ class FirestoreManager {
     /*
         Months
      */
-    func addMonth(month: Month, completion: @escaping (Result<Month?, Error>) -> Void) {
-        do {
-            let ref = try db.collection("months").addDocument(from: month)
-            
-            ref.getDocument { (snapshot, error) in
-                guard let snapshot = snapshot, error == nil else {
-                    completion(.failure(error!))
-                    return
-                }
-                
-                let month = try? snapshot.data(as: Month.self)
-                completion(.success(month))
-            }
-        } catch {
-            completion(.failure(error))
-        }
-    }
-    
-    func fetchMonth(completion: @escaping (Result<[Month]?, Error>) -> Void) {
+    func fetchMonth(userId: String, completion: @escaping (Result<[Month]?, Error>) -> Void) {
         let currentMonth = Calendar.current.component(.month, from: Date())
         let currentYear = Calendar.current.component(.year, from: Date())
         
         db.collection("months")
+            .whereField("userId", isEqualTo: userId)
             .whereField("month", isEqualTo: currentMonth)
             .whereField("year", isEqualTo: currentYear)
             .getDocuments { snapshot, error in
@@ -63,6 +46,24 @@ class FirestoreManager {
                     }
                 }
             }
+    }
+    
+    func addMonth(month: Month, completion: @escaping (Result<Month?, Error>) -> Void) {
+        do {
+            let ref = try db.collection("months").addDocument(from: month)
+            
+            ref.getDocument { (snapshot, error) in
+                guard let snapshot = snapshot, error == nil else {
+                    completion(.failure(error!))
+                    return
+                }
+                
+                let month = try? snapshot.data(as: Month.self)
+                completion(.success(month))
+            }
+        } catch {
+            completion(.failure(error))
+        }
     }
     
     /*

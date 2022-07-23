@@ -10,6 +10,7 @@ import Firebase
 
 class AddExpenseViewModel: ObservableObject {
     private var firestoreManager: FirestoreManager
+    
     @Published var expenseSaved: Bool = false
     
     @Published var categoryId = ""

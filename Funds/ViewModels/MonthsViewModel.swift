@@ -20,7 +20,11 @@ class MonthsViewModel: ObservableObject {
     }
     
     func fetchCurrentMonth() {
-        firestoreManager.fetchMonth { result in
+        guard let currentUser = Auth.auth().currentUser else {
+            return
+        }
+        
+        firestoreManager.fetchMonth(userId: currentUser.uid) { result in
             switch result {
             case .success(let months):
                 if let months = months {
