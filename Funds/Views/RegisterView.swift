@@ -10,8 +10,7 @@ import SwiftUI
 struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @State private var email = ""
-    @State private var password = ""
+    @StateObject private var registerViewModel = RegisterViewModel()
     
     var body: some View {
         NavigationView {
@@ -25,15 +24,19 @@ struct RegisterView: View {
                     .padding(.top, 8)
                 
                 VStack(alignment: .leading) {
-                    TextField("Email", text: $email)
+                    TextField("Email", text: $registerViewModel.email)
                         .textFieldStyle(.roundedBorder)
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
                     
-                    TextField("Password", text: $password)
+                    TextField("Password", text: $registerViewModel.password)
                         .textFieldStyle(.roundedBorder)
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
                     
                     HStack(spacing: 4) {
                         Text("Already have an account?")
-                        Button("Sign up") {
+                        Button("Sign in") {
                             presentationMode.wrappedValue.dismiss()
                         }
                     }
@@ -42,11 +45,17 @@ struct RegisterView: View {
                 .padding(.vertical)
                 
                 
-                Button("Login") { }
-                    .padding(8)
-                    .frame(maxWidth: .infinity)
-                    .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Color("Emerald")))
-                    .foregroundColor(.white)
+                Button(action: {
+                    registerViewModel.createAccount {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }) {
+                    Text("Save")
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                }
+                .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Color("Emerald")))
+                .foregroundColor(.white)
             }
             .padding()
         }

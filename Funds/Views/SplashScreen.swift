@@ -18,7 +18,7 @@ struct SplashScreen: View {
         if isActive && monthsViewModel.month.month == 0 && monthsViewModel.month.year == 0 {
             AddMonthView(monthsViewModel: monthsViewModel, hasCurrentMonth: $monthsViewModel.hasCurrentMonth)
         } else if isActive && monthsViewModel.month.month != 0 && monthsViewModel.month.year != 0 {
-            ContentView(monthsViewModel: monthsViewModel)
+            ContentView()
         } else {
             
             ZStack {

@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var monthsViewModel: MonthsViewModel
     @State private var selectedTab = "home"
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView(monthsViewModel: monthsViewModel)
+            HomeView()
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
@@ -22,23 +21,23 @@ struct ContentView: View {
                 }
                 .tag("home")
             
-            CategoriesView(categories: monthsViewModel.categories)
-                .tabItem {
-                    Label("Categories", systemImage: "rectangle.stack")
-                }
-                .onTapGesture {
-                    selectedTab = "categories"
-                }
-                .tag("categories")
-            
-            CategoriesView(categories: monthsViewModel.categories)
-                .tabItem {
-                    Label("History", systemImage: "calendar")
-                }
-                .onTapGesture {
-                    selectedTab = "history"
-                }
-                .tag("history")
+//            CategoriesView(categories: monthsViewModel.categories)
+//                .tabItem {
+//                    Label("Categories", systemImage: "rectangle.stack")
+//                }
+//                .onTapGesture {
+//                    selectedTab = "categories"
+//                }
+//                .tag("categories")
+//
+//            CategoriesView(categories: monthsViewModel.categories)
+//                .tabItem {
+//                    Label("History", systemImage: "calendar")
+//                }
+//                .onTapGesture {
+//                    selectedTab = "history"
+//                }
+//                .tag("history")
         }
     }
 }

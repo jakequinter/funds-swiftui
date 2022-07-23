@@ -22,7 +22,7 @@ struct AddMonthView: View {
                     hasCurrentMonth = true
                 }
                 
-                NavigationLink(destination: ContentView(monthsViewModel: monthsViewModel).navigationBarBackButtonHidden(true), isActive: $monthsViewModel.hasCurrentMonth) {EmptyView().navigationBarBackButtonHidden()}
+                NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), isActive: $monthsViewModel.hasCurrentMonth) {EmptyView().navigationBarBackButtonHidden()}
             }
         }
     }

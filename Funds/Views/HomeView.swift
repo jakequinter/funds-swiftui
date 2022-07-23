@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    var monthsViewModel: MonthsViewModel
+    @ObservedObject private var monthsViewModel = MonthsViewModel()
     
     @State private var isPresented = false;
     
@@ -59,6 +59,9 @@ struct HomeView: View {
                 AddExpenseView(categories: monthsViewModel.categories)
                     .presentationDetents([.medium])
             })
+            .onAppear {
+                monthsViewModel.fetchCurrentMonth()
+            }
             .toolbar() {
                 if !monthsViewModel.expenses.isEmpty {
                     Button("Add expense", action: {

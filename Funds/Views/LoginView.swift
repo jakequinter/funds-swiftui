@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct LoginView: View {
+    @StateObject private var loginViewModel = LoginViewModel()
+    
+    @State private var isActive = false
     @State private var isPresented = false
-    @State private var email = ""
-    @State private var password = ""
     
     var body: some View {
         NavigationView {
@@ -24,11 +25,15 @@ struct LoginView: View {
                     .padding(.top, 8)
                 
                 VStack(alignment: .leading) {
-                    TextField("Email", text: $email)
+                    TextField("Email", text: $loginViewModel.email)
                         .textFieldStyle(.roundedBorder)
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
                     
-                    TextField("Password", text: $password)
+                    TextField("Password", text: $loginViewModel.password)
                         .textFieldStyle(.roundedBorder)
+                        .autocapitalization(.none)
+                        .autocorrectionDisabled()
                     
                     HStack(spacing: 4) {
                         Text("Don't have an account?")
@@ -41,11 +46,19 @@ struct LoginView: View {
                 .padding(.vertical)
                 
                 
-                Button("Login") { }
-                    .padding(8)
-                    .frame(maxWidth: .infinity)
-                    .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Color("Emerald")))
-                    .foregroundColor(.white)
+                Button(action: {
+                    loginViewModel.login {
+                        isActive = true
+                    }
+                }) {
+                    Text("Login")
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 8)
+                }
+                .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Color("Emerald")))
+                .foregroundColor(.white)
+                
+                NavigationLink(destination: ContentView().navigationBarBackButtonHidden(true), isActive: $isActive) {EmptyView().navigationBarBackButtonHidden()}
             }
             .padding()
             .sheet(isPresented: $isPresented) {
